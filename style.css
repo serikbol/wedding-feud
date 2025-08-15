@@ -1,3 +1,45 @@
+/* Final screen styling */
+#finalScreen {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 5000;
+  background: rgba(255,255,255,0.97);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: #a67c52;
+  font-family: 'Montserrat', Arial, sans-serif;
+  transition: opacity 0.5s;
+}
+.final-message {
+  text-align: center;
+  background: linear-gradient(135deg, #fffbe6 80%, #ffe066 100%);
+  color: #a67c52;
+  padding: 64px 48px 54px 48px;
+  border-radius: 32px;
+  box-shadow: 0 8px 40px #0002, 0 0 0 8px #ffe06655;
+  font-size: 2.2em;
+  max-width: 90vw;
+  border: 2px solid #ffe066;
+  border-top: 8px double #a67c52;
+  border-bottom: 8px double #a67c52;
+}
+.final-message h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 4em;
+  margin-bottom: 0.3em;
+  color: #a67c52;
+  letter-spacing: 2px;
+  text-shadow: 0 4px 24px #ffe06688, 0 2px 0 #fff;
+}
+.final-message p {
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-size: 1.5em;
+  color: #a67c52;
+  margin-top: 1.2em;
+  text-shadow: 0 2px 8px #ffe06644;
+}
 body {
 font-family: Arial, sans-serif;
 background-size: cover;

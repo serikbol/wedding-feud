@@ -115,6 +115,24 @@ function setQuestionBackground(bgUrl) {
 }
 
 function loadRound() {
+  // Hide final screen if showing
+  const finalScreen = document.getElementById('finalScreen');
+  if (finalScreen) finalScreen.style.display = 'none';
+
+  // If out of rounds, show final screen and hide game UI
+  if (currentRound >= rounds.length) {
+    document.getElementById('question').style.display = 'none';
+    document.getElementById('board').style.display = 'none';
+    document.querySelector('.controls').style.display = 'none';
+    if (finalScreen) finalScreen.style.display = 'flex';
+    return;
+  } else {
+    document.getElementById('question').style.display = '';
+    document.getElementById('board').style.display = '';
+    document.querySelector('.controls').style.display = '';
+    if (finalScreen) finalScreen.style.display = 'none';
+  }
+
   const round = rounds[currentRound];
   setQuestionBackground(round.background);
   document.getElementById('question').textContent = round.question;
@@ -199,15 +217,31 @@ function wrongGuess() {
 }
 
 function nextRound() {
+  // Stop all song audios
+  document.querySelectorAll('.song-audio').forEach(a => { a.pause(); a.currentTime = 0; });
+  // Resume background music if paused
+  const bgMusic = document.getElementById('bgMusic');
+  if (bgMusic && bgMusic.paused) {
+    bgMusic.play();
+  }
   if (currentRound < rounds.length - 1) {
     currentRound++;
     loadRound();
   } else {
-    alert("No more rounds!");
+    // Show final screen
+    currentRound = rounds.length;
+    loadRound();
   }
 }
 
 function prevRound() {
+  // Stop all song audios
+  document.querySelectorAll('.song-audio').forEach(a => { a.pause(); a.currentTime = 0; });
+  // Resume background music if paused
+  const bgMusic = document.getElementById('bgMusic');
+  if (bgMusic && bgMusic.paused) {
+    bgMusic.play();
+  }
   if (currentRound > 0) {
     currentRound--;
     loadRound();
