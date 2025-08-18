@@ -8,8 +8,7 @@ const rounds = [
     { text: "Spaghetti/Noodles", points: 16 },
     { text: "French Food", points: 10 },
     { text: "Durian", points: 5 }
-  ],
-  background: "bg.png"
+  ]
 },
 {
   question: "What’s a reason someone might cry at a wedding?",
@@ -351,19 +350,26 @@ window.addEventListener('DOMContentLoaded', function() {
         const familyFeudImg = document.getElementById('familyFeudImage');
         if (familyFeudImg) {
           familyFeudImg.style.display = 'block';
-          familyFeudImg.classList.remove('bounce');
+          familyFeudImg.classList.remove('bounce', 'whoosh');
           // Force reflow to restart animation
           void familyFeudImg.offsetWidth;
           familyFeudImg.classList.add('bounce');
         }
+        // Show image for longer, then whoosh away, then start game
         setTimeout(() => {
-          if (familyFeudImg) familyFeudImg.style.display = 'none';
-          countdown.style.display = 'none';
-          mainContent.style.display = '';
-          board.style.display = '';
-          controls.style.display = '';
-          loadRound(); // <-- Only load the round after intro/countdown
-        }, 1400);
+          if (familyFeudImg) {
+            familyFeudImg.classList.remove('bounce');
+            familyFeudImg.classList.add('whoosh');
+          }
+          setTimeout(() => {
+            if (familyFeudImg) familyFeudImg.style.display = 'none';
+            countdown.style.display = 'none';
+            mainContent.style.display = '';
+            board.style.display = '';
+            controls.style.display = '';
+            loadRound(); // <-- Only load the round after intro/countdown
+          }, 700); // whoosh duration
+        }, 1400 + 1600); // 1400ms original + 600ms extra hold
       }
     }
     doCountdown();
