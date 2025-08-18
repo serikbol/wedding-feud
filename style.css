@@ -1,3 +1,14 @@
+/* Bounce animation for Family Feud image */
+#familyFeudImage.bounce {
+  animation: familyfeud-bounce 1.1s cubic-bezier(.2,1.5,.5,1);
+}
+@keyframes familyfeud-bounce {
+  0% { transform: scale(0.7); opacity: 0; }
+  40% { transform: scale(1.2); opacity: 1; }
+  60% { transform: scale(0.95); }
+  80% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
 /* Final screen styling */
 #finalScreen {
   position: fixed;

@@ -125,6 +125,23 @@ function loadRound() {
     document.getElementById('board').style.display = 'none';
     document.querySelector('.controls').style.display = 'none';
     if (finalScreen) finalScreen.style.display = 'flex';
+    // Fade out background music
+    const bgMusic = document.getElementById('bgMusic');
+    if (bgMusic) {
+      let fadeSteps = 24;
+      let fadeDuration = 1200; // ms
+      let startVol = bgMusic.volume;
+      let step = 0;
+      let interval = setInterval(() => {
+        step++;
+        let newVol = startVol * (1 - step / fadeSteps);
+        bgMusic.volume = Math.max(0, newVol);
+        if (step >= fadeSteps) {
+          bgMusic.volume = 0;
+          clearInterval(interval);
+        }
+      }, fadeDuration / fadeSteps);
+    }
     return;
   } else {
     document.getElementById('question').style.display = '';
@@ -329,13 +346,18 @@ window.addEventListener('DOMContentLoaded', function() {
           doCountdown();
         }, 800);
       } else {
-        countdownNum.textContent = 'Family Feud!';
-        countdownNum.classList.add('feud');
-        countdownNum.style.display = 'block';
-        countdownNum.style.animation = 'none';
-        void countdownNum.offsetWidth;
-        countdownNum.style.animation = '';
+        // Show Family Feud image instead of text
+        countdownNum.style.display = 'none';
+        const familyFeudImg = document.getElementById('familyFeudImage');
+        if (familyFeudImg) {
+          familyFeudImg.style.display = 'block';
+          familyFeudImg.classList.remove('bounce');
+          // Force reflow to restart animation
+          void familyFeudImg.offsetWidth;
+          familyFeudImg.classList.add('bounce');
+        }
         setTimeout(() => {
+          if (familyFeudImg) familyFeudImg.style.display = 'none';
           countdown.style.display = 'none';
           mainContent.style.display = '';
           board.style.display = '';
